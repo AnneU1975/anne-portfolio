@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma. Antoneth Ullegue — Social Media VA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --gold: #c9a84c;
+    --gold-light: #f5e6c0;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: rgba(201,168,76,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 4rem;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; letter-spacing: 0.04em;
+    color: var(--navy);
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5rem 3rem 5rem 4rem;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold-light);
+    color: #7a5c1e;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-badge::before { content: '✦'; }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.08;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .hero-name em { color: var(--gold); font-style: italic; }
+  .hero-tagline {
+    font-size: 1.05rem; font-weight: 300; color: var(--muted);
+    line-height: 1.75; max-width: 430px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--navy); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: #1a2f47; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1.5px solid var(--gold); color: var(--gold);
+    padding: 0.85rem 2rem; border-radius: 100px;
+    font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--white); }
+
+  .hero-right {
+    background: var(--navy);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 5rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 60px solid rgba(201,168,76,0.08);
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 40px solid rgba(201,168,76,0.06);
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; width: 100%; max-width: 360px; z-index: 1;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px; padding: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem; color: var(--gold);
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.78rem; font-weight: 400; color: rgba(255,255,255,0.55);
+    line-height: 1.4;
+  }
+  .hero-intro {
+    color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.7;
+    text-align: center; max-width: 320px; z-index: 1;
+    margin-bottom: 2rem;
+  }
+  .hero-intro strong { color: var(--gold); font-weight: 500; }
+
+  /* SECTION COMMON */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--navy); line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--muted); line-height: 1.75;
+    max-width: 540px; margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+    background: var(--white);
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-wrap::before {
+    content: '';
+    position: absolute; top: -20px; left: -20px;
+    right: 20px; bottom: 20px;
+    border: 2px solid var(--gold);
+    border-radius: 24px;
+    z-index: 0;
+  }
+  .about-img {
+    width: 100%; border-radius: 20px;
+    object-fit: cover; aspect-ratio: 3/4;
+    position: relative; z-index: 1;
+    display: block;
+  }
+  .about-quote {
+    position: absolute; bottom: -1rem; right: -1.5rem; z-index: 2;
+    background: var(--navy); color: var(--white);
+    padding: 1rem 1.25rem; border-radius: 16px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 0.85rem;
+    max-width: 200px; line-height: 1.5;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+  .about-quote span { display: block; color: var(--gold); font-style: normal; font-size: 0.72rem; margin-top: 0.4rem; font-family: 'DM Sans', sans-serif; }
+  .about-values { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+  .about-value {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border); border-radius: 14px;
+    background: var(--cream);
+  }
+  .about-value-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--gold-light); display: flex;
+    align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .about-value-title { font-size: 0.9rem; font-weight: 500; color: var(--navy); margin-bottom: 0.2rem; }
+  .about-value-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+  /* SERVICES */
+  .services { background: var(--white); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .service-card {
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 2rem 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    background: var(--white);
+  }
+  .service-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--gold-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1.25rem;
+  }
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--navy); margin-bottom: 0.6rem;
+  }
+  .service-desc {
+    font-size: 0.875rem; color: var(--muted); line-height: 1.7;
+  }
+
+  /* PORTFOLIO */
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .portfolio-item {
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative; background: var(--white);
+    transition: transform 0.2s;
+  }
+  .portfolio-item:hover { transform: translateY(-4px); }
+  .portfolio-img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover; display: block;
+  }
+  .portfolio-tag-wrap {
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .portfolio-name { font-size: 0.9rem; font-weight: 500; color: var(--navy); }
+  .portfolio-tag {
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--gold-light); color: #7a5c1e;
+    padding: 0.25rem 0.75rem; border-radius: 100px;
+  }
+
+  /* TOOLS */
+  .tools { background: var(--navy); }
+  .tools .section-title { color: var(--white); }
+  .tools .section-sub { color: rgba(255,255,255,0.5); }
+  .tools .section-label { color: var(--gold); }
+  .tools-list {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+  }
+  .tool-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    color: rgba(255,255,255,0.8);
+    padding: 0.55rem 1.2rem; border-radius: 100px;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+  .tool-pill:hover { background: rgba(201,168,76,0.15); }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--cream); }
+  .testimonial-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C';
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem; line-height: 1;
+    color: var(--gold-light);
+    position: absolute; top: 1rem; left: 1.5rem;
+    pointer-events: none;
+  }
+  .testimonial-text {
+    font-size: 1rem; line-height: 1.85; color: var(--text);
+    font-style: italic; position: relative; z-index: 1;
+    margin-bottom: 2rem;
+  }
+  .testimonial-stars {
+    color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .testimonial-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold); flex-shrink: 0;
+  }
+  .testimonial-name { font-size: 0.95rem; font-weight: 500; color: var(--navy); }
+  .testimonial-role { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+  .linkedin-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; color: #0077b5; font-weight: 500;
+    background: #e8f4fd; padding: 0.2rem 0.6rem; border-radius: 100px;
+    margin-top: 0.3rem;
+    text-decoration: none;
+  }
+
+  /* CONTACT */
+  .contact {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--muted); letter-spacing: 0.05em; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 130px; }
+  .contact-links { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 0.5rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 16px; text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    color: var(--text);
+  }
+  .contact-link:hover { border-color: var(--gold); transform: translateX(4px); }
+  .contact-link-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: var(--gold-light);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-link-text { font-size: 0.85rem; color: var(--muted); }
+  .contact-link-val { font-size: 0.9rem; font-weight: 500; color: var(--navy); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); text-align: center;
+    padding: 2rem 4rem;
+    color: rgba(255,255,255,0.35); font-size: 0.82rem;
+  }
+  footer span { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.35s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.5s; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--navy); color: var(--white);
+    padding: 1rem 1.5rem; border-radius: 12px;
+    font-size: 0.875rem; font-weight: 500;
+    border: 1px solid var(--gold);
+    opacity: 0; transition: opacity 0.3s;
+    pointer-events: none; z-index: 999;
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 900px) {
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-wrap::before { display: none; }
+    nav { padding: 1rem 2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { padding: 3rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .contact { grid-template-columns: 1fr; gap: 3rem; }
+    section { padding: 4rem 2rem; }
+    .hero-left { padding: 4rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Anne <span>Ullegue</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-badge">Available for Freelance Work</div>
+    <h1 class="hero-name">Hi, I'm <em>Anne</em> —<br>Your Social Media VA</h1>
+    <p class="hero-tagline">I help business owners grow their brand online through strategic content, lead generation, and seamless admin support — so you can focus on what you do best.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Work With Me</a>
+      <a href="#portfolio" class="btn-outline">See My Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-intro">With <strong>9+ years in customer service</strong> and <strong>3+ years as a VA</strong>, I bring clarity, consistency, and creativity to every client I work with.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">9+</div>
+        <div class="stat-label">Years in Customer Service</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years as a Virtual Assistant</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Social Platforms Managed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Remote & Reliable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap">
+    <img src="anne-photo.png" alt="Ma. Antoneth Anne Ullegue" class="about-img">
+    <div class="about-quote">
+      "I don't just manage content — I help your brand grow."
+      <span>— Anne Ullegue, VA</span>
+    </div>
+  </div>
+  <div>
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">The VA Behind<br>Your Brand's Growth</h2>
+    <p style="font-size:1rem; color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+      Hi, I'm <strong style="color:var(--navy);">Ma. Antoneth — call me Anne.</strong> I'm a Filipino Virtual Assistant with a deep background in customer service and a genuine passion for helping businesses show up online with purpose and consistency.
+    </p>
+    <p style="font-size:1rem; color:var(--muted); line-height:1.8; margin-bottom:2rem;">
+      Over the past 3+ years as a freelance VA, I've managed social media accounts, built lead pipelines, and handled the behind-the-scenes work that keeps businesses running smoothly — all remotely, all reliably. Before that, I spent nearly 9 years in customer service roles across e-commerce, financial, and streaming platforms, which means I understand your customers as well as I understand content.
+    </p>
+    <div class="about-values">
+      <div class="about-value">
+        <div class="about-value-icon">🎯</div>
+        <div>
+          <div class="about-value-title">Strategically Minded</div>
+          <div class="about-value-desc">Every post, email, and campaign has a purpose. I focus on results, not just activity.</div>
+        </div>
+      </div>
+      <div class="about-value">
+        <div class="about-value-icon">🤝</div>
+        <div>
+          <div class="about-value-title">Client-First Approach</div>
+          <div class="about-value-desc">9 years in customer service taught me how to communicate clearly and solve problems fast.</div>
+        </div>
+      </div>
+      <div class="about-value">
+        <div class="about-value-icon">⚡</div>
+        <div>
+          <div class="about-value-title">Reliable & Remote-Ready</div>
+          <div class="about-value-desc">Fluent with async work, remote tools, and keeping your business running across time zones.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label">What I Offer</p>
+  <h2 class="section-title">Services Built for<br>Growing Businesses</h2>
+  <p class="section-sub">From crafting your brand voice to nurturing leads — I handle the work that keeps your business moving forward.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3 class="service-title">Social Media Management</h3>
+      <p class="service-desc">Content creation, scheduling, and engagement across Facebook, LinkedIn, and Instagram. Consistent calendars, growing audiences.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3 class="service-title">Lead Generation</h3>
+      <p class="service-desc">Targeted campaigns to identify and qualify potential clients. CRM management, email outreach, and follow-up — all handled.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✉️</div>
+      <h3 class="service-title">Email & Admin Support</h3>
+      <p class="service-desc">Inbox management, business correspondence, appointment scheduling, and CRM data entry to keep your operations clean.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <h3 class="service-title">Graphic Design (Social)</h3>
+      <p class="service-desc">Eye-catching branded posts and promotional graphics tailored to your audience. Consistent visual identity across all platforms.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💬</div>
+      <h3 class="service-title">Community Engagement</h3>
+      <p class="service-desc">Responding to comments, DMs, and online communities to build genuine connections and increase brand awareness.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3 class="service-title">CRM & Data Management</h3>
+      <p class="service-desc">Organized pipelines in HubSpot or Salesforce. Accurate lead tracking, database maintenance, and actionable reporting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <p class="section-label">Work Samples</p>
+  <h2 class="section-title">Designs That<br>Drive Engagement</h2>
+  <p class="section-sub">A selection of social media content I've created for real clients — branded, strategic, and built to perform.</p>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <img src="National_Rescue_dog__1_.png" alt="National Rescue Dog Day post for Crownsway Insurance" class="portfolio-img">
+      <div class="portfolio-tag-wrap">
+        <span class="portfolio-name">Crownsway Insurance — National Rescue Dog Day</span>
+        <span class="portfolio-tag">Social Post</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="Receptionist_day__1_.png" alt="National Receptionists Day post for Crownsway Insurance" class="portfolio-img">
+      <div class="portfolio-tag-wrap">
+        <span class="portfolio-name">Crownsway Insurance — Receptionists' Day</span>
+        <span class="portfolio-tag">Social Post</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="Shop_Your_Favorite_Oils_Today.png" alt="JennScents Aromaversity product post" class="portfolio-img">
+      <div class="portfolio-tag-wrap">
+        <span class="portfolio-name">JennScents Aromaversity — Product Promo</span>
+        <span class="portfolio-tag">Product Ad</span>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="ChatGPT_Image_May_21__2026__04_26_12_PM.png" alt="JennScents Aromaversity certification post" class="portfolio-img">
+      <div class="portfolio-tag-wrap">
+        <span class="portfolio-name">JennScents Aromaversity — Certification Info</span>
+        <span class="portfolio-tag">Educational</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="tools" id="tools">
+  <p class="section-label">Tech Stack</p>
+  <h2 class="section-title">Tools I Work With</h2>
+  <p class="section-sub">I'm comfortable with the platforms your business already uses — no onboarding headaches.</p>
+  <div class="tools-list">
+    <span class="tool-pill">HubSpot</span>
+    <span class="tool-pill">Salesforce</span>
+    <span class="tool-pill">Canva</span>
+    <span class="tool-pill">Meta Business Suite</span>
+    <span class="tool-pill">LinkedIn</span>
+    <span class="tool-pill">Instagram</span>
+    <span class="tool-pill">Facebook</span>
+    <span class="tool-pill">Mailchimp</span>
+    <span class="tool-pill">Google Workspace</span>
+    <span class="tool-pill">Microsoft Office</span>
+    <span class="tool-pill">Zoom</span>
+    <span class="tool-pill">Slack</span>
+    <span class="tool-pill">Trello / Notion</span>
+    <span class="tool-pill">ChatGPT / AI Tools</span>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <p class="section-label">Kind Words</p>
+  <h2 class="section-title">What Clients Say</h2>
+  <p class="section-sub">Real feedback from people I've had the privilege of working with directly.</p>
+  <div class="testimonial-card" style="max-width: 780px;">
+    <div class="testimonial-stars">★★★★★</div>
+    <p class="testimonial-text">
+      "I had the privilege of managing Anne, and without exaggeration, she was the most exceptional individual I've worked with. Brilliant, reliable, resourceful, and consistently ahead of the curve — Anne raised the bar across every aspect of the role. Whether it was strategic thinking, execution, team collaboration, or simply getting things done when it mattered most, Anne delivered with integrity and excellence. Any team would be lucky to have her."
+    </p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar">JL</div>
+      <div>
+        <div class="testimonial-name">Jim Lumley</div>
+        <div class="testimonial-role">Investment Management Solutions: Transformative FinTech/SaaS<br>
+          <em style="font-size:0.75rem; color:var(--muted);">June 2025 · Managed Ma. Antoneth directly</em>
+        </div>
+        <a href="https://www.linkedin.com/in/ma-antoneth-ullegue/" target="_blank" class="linkedin-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#0077b5"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.88v1.36h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v5.61z"/></svg>
+          Verified LinkedIn Recommendation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact">
+    <div>
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's Work<br>Together</h2>
+      <p class="section-sub">Whether you need consistent social content, a lead gen strategy, or reliable VA support — I'd love to hear about your business.</p>
+      <div class="contact-links">
+        <a href="mailto:maantonethullegue@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-text">Email</div>
+            <div class="contact-link-val">maantonethullegue@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/ma-antoneth-ullegue/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          <div>
+            <div class="contact-link-text">LinkedIn</div>
+            <div class="contact-link-val">ma-antoneth-ullegue</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane Smith" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@company.com" required>
+      </div>
+      <div class="form-group">
+        <label>Service You Need</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Social Media Management</option>
+          <option>Lead Generation</option>
+          <option>Email & Admin Support</option>
+          <option>Graphic Design (Social)</option>
+          <option>CRM & Data Management</option>
+          <option>Full VA Package</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Me About Your Project</label>
+        <textarea placeholder="Share a bit about your business and what kind of support you're looking for..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:fit-content; border:none; cursor:pointer; font-family:'DM Sans',sans-serif;">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>Ma. Antoneth "Anne" Ullegue</span> · Social Media Virtual Assistant · Philippines</p>
+</footer>
+
+<div class="toast" id="toast">✓ Message sent! I'll be in touch soon.</div>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  e.target.reset();
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
